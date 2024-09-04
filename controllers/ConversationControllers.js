@@ -40,7 +40,7 @@ exports.getConversationId = async (req, res) => {
       { _id: 1 }
     );
     if (!conversationId)
-      return res.status(404).json({ message: "Conversation Not Found!" });
+      return res.status(410).json({ message: "Conversation Not Found!" });
     return res.status(201).json(conversationId);
   } catch (error) {
     return res.status(401).send({ message: error.message });
