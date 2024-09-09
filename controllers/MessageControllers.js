@@ -24,3 +24,33 @@ exports.getMessages = async (req, res) => {
     return res.status(401).json({ message: error.message });
   }
 };
+
+exports.setFile = async (req, res) => {
+  const { sender, conversationId, content } = req.body;
+  try {
+    const newMessage = await Message.create({
+      conversationId,
+      sender,
+      content,
+      file: req.file,
+    });
+    return res.status(201).json(newMessage);
+  } catch (error) {
+    return res.status(401).json({ message: error.message });
+  }
+};
+
+exports.setImage = async (req, res) => {
+  const { sender, conversationId, content } = req.body;
+  try {
+    const newMessage = await Message.create({
+      conversationId,
+      sender,
+      content,
+      image: req.file,
+    });
+    return res.status(201).json(newMessage);
+  } catch (error) {
+    return res.status(401).json({ message: error.message });
+  }
+};

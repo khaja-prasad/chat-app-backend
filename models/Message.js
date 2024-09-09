@@ -14,7 +14,13 @@ var messageSchema = new mongoose.Schema(
     },
     content: {
       type: String,
-      required: true,
+      // required: true,
+    },
+    image: {
+      type: Object,
+    },
+    file: {
+      type: Object,
     },
   },
   {

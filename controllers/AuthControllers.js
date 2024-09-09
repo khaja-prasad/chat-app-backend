@@ -95,3 +95,22 @@ exports.getUsers = async (req, res) => {
     return res.status(401).json({ message: error.message });
   }
 };
+
+exports.setProfilePicture = async (req, res) => {
+  const { _id } = req.body;
+  // console.log(req.file);
+  const profile_photo_url = `http://localhost:3030/${req.file.filename}`;
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: _id },
+      { profile_photo_url: profile_photo_url }
+    );
+    const loggedUser = await User.findOne(
+      { email: user.email },
+      { _id: 1, email: 1, name: 1, profile_photo_url: 1 }
+    );
+    return res.status(201).json(loggedUser);
+  } catch (error) {
+    return res.status(401).json({ message: error.message });
+  }
+};
